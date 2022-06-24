@@ -56,7 +56,7 @@ makeTuruKameTakoZanButton.onclick = function () {
         
         if(parseInt(answerInput.value) === animalsMap.get(checkedAnimalsArray[0])){
             console.log(animalsMap.get(checkedAnimalsArray[0]));
-            console.log('正解');
+            //console.log('正解');
             celebrationDivided.innerText = '';
             const celebrationMessage = document.createElement('h1');
             celebrationMessage.innerText = '正解！！';
@@ -65,7 +65,7 @@ makeTuruKameTakoZanButton.onclick = function () {
             
         }else{
             console.log(animalsMap.get(checkedAnimalsArray[0]));
-            console.log('不正解');
+            //console.log('不正解');
             celebrationDivided.innerText = '';
             const celebrationMessage = document.createElement('h1');
             celebrationMessage.innerText = '不正解です';
