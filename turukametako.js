@@ -82,8 +82,9 @@ makeTuruKameTakoZanButton.onclick = function () {
  * @param {}
  * @return {int}
  */
+//TODO 0を確認したので0が出ないようにする
 function returnRandomNumber1_100() {
-    return Math.floor(Math.random() * 100);
+    return Math.floor(Math.random() * 101);
 }
 
 //Mapのkeyを動物名、valueをランダムな匹数にして返す
@@ -92,6 +93,8 @@ function returnRandomNumber1_100() {
  * @return {Map}
  */
 function returnAnimalsMap(arr){
+
+    
     let map = new Map();
     for(let i = 0; i < arr.length;i++){
         map.set(arr[i],returnRandomNumber1_100());
