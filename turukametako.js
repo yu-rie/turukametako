@@ -4,6 +4,9 @@ const kameLegNum = 4;
 const takoLegNum = 8;
 let animalsCheckbox = document.getElementsByName('animals_checkbox');
 const makeTuruKameTakoZanButton = document.getElementById('make_turu_kame_tako_zan');
+const questionDivided = document.getElementById('question_area');
+const answerDivided = document.getElementById('answer_area');
+const celebrationDivided = document.getElementById('celebration_area');
 
 makeTuruKameTakoZanButton.onclick = function () {
     //チェックボックスにチェックの入った動物を配列に入れる
@@ -14,13 +17,62 @@ makeTuruKameTakoZanButton.onclick = function () {
             checkedAnimalsArray.push(animalsCheckbox.item(i).value);
         }
     }
+    //チェックボックスのチェックの数が二つでないときにアラートを出す
+    if(checkedAnimalsArray.length != 2){
+        alert('チェックボックスは二つ選択してください');
+        return;
+    }
     //Mapに動物とランダムに出した引数を入れる
     let animalsMap = returnAnimalsMap(checkedAnimalsArray);
     //Mapの値から足の合計足本数を出す
     let sumOfLegs = returnSumOfLegs(animalsMap);
+    let sumOfHeads = returnSumOfHeads(animalsMap);
     console.log(animalsMap);
-    console.log(sumOfLegs);
+    console.log(sumOfHeads);
     //問題文を作る
+    let questionSentence = makeQuestionSentence(animalsMap,sumOfHeads,sumOfLegs);
+    //問題文表示エリアの作成
+    questionDivided.innerText = '';
+    const header = document.createElement('h3');
+    header.innerText = '問';
+    questionDivided.appendChild(header);
+
+    const paragraph = document.createElement('p');
+    paragraph.innerText = questionSentence;
+    questionDivided.appendChild(paragraph);
+
+    //解答入力エリアの作成
+    answerDivided.innerText = '';
+    const answerInput = document.createElement('input');
+    answerDivided.appendChild(answerInput);
+
+    const answerButton = document.createElement('button');
+    answerButton.innerText = '回答する';
+    answerDivided.appendChild(answerButton);
+
+    //answerButtonのonclickを取得する
+    answerButton.onclick = function(){
+
+        
+        if(parseInt(answerInput.value) === animalsMap.get(checkedAnimalsArray[0])){
+            console.log(animalsMap.get(checkedAnimalsArray[0]));
+            console.log('正解');
+            celebrationDivided.innerText = '';
+            const celebrationMessage = document.createElement('h1');
+            celebrationMessage.innerText = '正解！！';
+            celebrationDivided.appendChild(celebrationMessage);
+            
+            
+        }else{
+            console.log(animalsMap.get(checkedAnimalsArray[0]));
+            console.log('不正解');
+            celebrationDivided.innerText = '';
+            const celebrationMessage = document.createElement('h1');
+            celebrationMessage.innerText = '不正解です';
+            celebrationDivided.appendChild(celebrationMessage);
+            
+        }
+    }
 
 }
 
@@ -66,6 +118,34 @@ function returnSumOfLegs(animalmap){
    }
 
    return legs;
+}
+
+//Mapを引数にして合計の頭数を返す
+/**
+ * @param {map}
+ * @return {int}
+ */
+function returnSumOfHeads(animalsmap){
+    let num = 0;
+    animalsmap.forEach(function(value,key) {
+        num = num + value;
+    })
+    return num;
+}
+
+/**
+ * Mapと頭数と総足数から問題文を返す
+ * @param {Map,int,int}
+ * @return {int}
+ */
+function makeQuestionSentence(animalsmap,headsnum,legsnum){
+    let keyArray = new Array();
+    animalsmap.forEach(function(value,key){
+        keyArray.push(key);
+    })
+
+    return `${keyArray[0]}と${keyArray[1]}が合計で${headsnum}匹います。足の数は合計で${legsnum}本です。${keyArray[0]}は何匹いますか？`;
+
 }
 
 
