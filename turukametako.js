@@ -27,8 +27,8 @@ makeTuruKameTakoZanButton.onclick = function () {
     //Mapの値から足の合計足本数を出す
     let sumOfLegs = returnSumOfLegs(animalsMap);
     let sumOfHeads = returnSumOfHeads(animalsMap);
-    console.log(animalsMap);
-    console.log(sumOfHeads);
+    //console.log(animalsMap);
+    //console.log(sumOfHeads);
     //問題文を作る
     let questionSentence = makeQuestionSentence(animalsMap,sumOfHeads,sumOfLegs);
     //問題文表示エリアの作成
@@ -55,7 +55,7 @@ makeTuruKameTakoZanButton.onclick = function () {
 
         
         if(parseInt(answerInput.value) === animalsMap.get(checkedAnimalsArray[0])){
-            console.log(animalsMap.get(checkedAnimalsArray[0]));
+            //console.log(animalsMap.get(checkedAnimalsArray[0]));
             //console.log('正解');
             celebrationDivided.innerText = '';
             const celebrationMessage = document.createElement('h1');
@@ -64,7 +64,7 @@ makeTuruKameTakoZanButton.onclick = function () {
             
             
         }else{
-            console.log(animalsMap.get(checkedAnimalsArray[0]));
+           // console.log(animalsMap.get(checkedAnimalsArray[0]));
             //console.log('不正解');
             celebrationDivided.innerText = '';
             const celebrationMessage = document.createElement('h1');
