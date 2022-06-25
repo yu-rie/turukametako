@@ -7,6 +7,7 @@ const makeTuruKameTakoZanButton = document.getElementById('make_turu_kame_tako_z
 const questionDivided = document.getElementById('question_area');
 const answerDivided = document.getElementById('answer_area');
 const celebrationDivided = document.getElementById('celebration_area');
+const tweetDivided = document.getElementById('tweet_area');
 
 makeTuruKameTakoZanButton.onclick = function () {
     //チェックボックスにチェックの入った動物を配列に入れる
@@ -31,6 +32,11 @@ makeTuruKameTakoZanButton.onclick = function () {
     //console.log(sumOfHeads);
     //問題文を作る
     let questionSentence = makeQuestionSentence(animalsMap,sumOfHeads,sumOfLegs);
+
+    //問題文からツイート文を作成する
+    function makeTweetSentence(){
+        return `${questionSentence} を解いて正解しました。挑戦したくなったら → https://bluezhiaar.github.io/turukametako/index.html #算数`;
+    }
     //問題文表示エリアの作成
     questionDivided.innerText = '';
     const header = document.createElement('h3');
@@ -61,7 +67,22 @@ makeTuruKameTakoZanButton.onclick = function () {
             const celebrationMessage = document.createElement('h1');
             celebrationMessage.innerText = '正解！！';
             celebrationDivided.appendChild(celebrationMessage);
-            
+            //ツイートエリアの作成
+            tweetDivided.innerText = '';
+            const anchor = document.createElement('a');
+            const hrefValue = "https://twitter.com/intent/tweet?button_hashtag=" + encodeURIComponent('ツルカメタコ算メーカー') + "&ref_src=twsrc%5Etfw";
+            const tweetSentence = makeTweetSentence();
+
+            anchor.setAttribute('href',hrefValue);
+            anchor.setAttribute('class',"twitter-hashtag-button");
+            anchor.setAttribute('data-text',tweetSentence);
+            anchor.innerText = 'Tweet #ツルカメタコ算メーカー';
+
+            tweetDivided.appendChild(anchor);
+
+            const script = document.createElement('script');
+            script.setAttribute('src',"https://platform.twitter.com/widgets.js");
+            tweetDivided.appendChild(script);
             
         }else{
            // console.log(animalsMap.get(checkedAnimalsArray[0]));
@@ -70,6 +91,8 @@ makeTuruKameTakoZanButton.onclick = function () {
             const celebrationMessage = document.createElement('h1');
             celebrationMessage.innerText = '不正解です';
             celebrationDivided.appendChild(celebrationMessage);
+            //ツイートエリアのクリア
+            tweetDivided.innerText = '';
             
         }
     }
