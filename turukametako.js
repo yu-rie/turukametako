@@ -35,7 +35,7 @@ makeTuruKameTakoZanButton.onclick = function () {
 
     //問題文からツイート文を作成する
     function makeTweetSentence(){
-        return `${questionSentence} を解いて正解しました。挑戦したくなったら → https://bluezhiaar.github.io/turukametako/index.html #算数`;
+        return `${questionSentence} を解いて正解しました。挑戦したくなったら → https://bluezhiaar.github.io/turukametako/index.html`;
     }
     //問題文表示エリアの作成
     questionDivided.innerText = '';
@@ -70,7 +70,7 @@ makeTuruKameTakoZanButton.onclick = function () {
             //ツイートエリアの作成
             tweetDivided.innerText = '';
             const anchor = document.createElement('a');
-            const hrefValue = "https://twitter.com/intent/tweet?button_hashtag=" + encodeURIComponent('ツルカメタコ算メーカー') + "&ref_src=twsrc%5Etfw";
+            const hrefValue = "https://twitter.com/intent/tweet?button_hashtag=" + encodeURIComponent('ツルカメタコ算メーカー') + "&hashtags=算数&ref_src=twsrc%5Etfw";
             const tweetSentence = makeTweetSentence();
 
             anchor.setAttribute('href',hrefValue);
